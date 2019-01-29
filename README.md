@@ -11,6 +11,9 @@
 ### 연구소
 * [BAEKJOON ONLINE JUDGE](https://www.acmicpc.net/problem/14502)
 * brute forece
+* success(20190129)
+* memory: 1988 KB
+* time: 24ms
 
 ### 치킨 배달
 * [BAEKJOON ONLINE JUDGE](https://www.acmicpc.net/problem/15686)
