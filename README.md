@@ -18,3 +18,6 @@
 ### 치킨 배달
 * [BAEKJOON ONLINE JUDGE](https://www.acmicpc.net/problem/15686)
 * brute forece
+* success(20190130)
+* memory: 2124 KB
+* time: 4ms

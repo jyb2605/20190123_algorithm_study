@@ -5,9 +5,14 @@ using namespace std;
 
 /*
 p 15686
-
 */
 
+// prototype
+int calcWholeDistance();
+int calcWholeDistance();
+bool isDrop(int x, int y);
+
+// variable
 class chickenDistance;
 
 int N, M;
@@ -36,11 +41,33 @@ public:
 };
 
 void dfs(int idx) {
+	if (shopNumber == M) {
+		minDistance = min(minDistance, calcWholeDistance());
+
+		shopNumber++;
+		for (vector<int>::iterator ptr = drop.begin(); ptr != drop.end(); ptr++) {
+			if (*ptr == idx) {
+				drop.erase(ptr);
+				break;
+			}
+		}
+		return;
+	}
+
 	shopNumber--;
 	drop.push_back(idx);
 
 	if (shopNumber == M) {
+		minDistance = min(minDistance, calcWholeDistance());
 
+		shopNumber++;
+		for (vector<int>::iterator ptr = drop.begin(); ptr != drop.end(); ptr++) {
+			if (*ptr == idx) {
+				drop.erase(ptr);
+				break;
+			}
+		}
+		return;
 	}
 
 	for (int i = idx + 1; i < shop.size(); i++) {
@@ -61,9 +88,14 @@ int calcWholeDistance() {
 
 	for (int i = 0; i < distances.size(); i++) {
 		for (int j = 0; j < distances[i].size(); j++) {
-			if(!isDrop(distances[i][j].x, distances[i][j].y))
+			if (!isDrop(distances[i][j].x, distances[i][j].y)) {
+				num += distances[i][j].distance;
+				break;
+			}
 		}
 	}
+
+	return num;
 }
 
 bool isDrop(int x, int y) {
@@ -109,6 +141,8 @@ int main()
 	for (int i = 0; i < shop.size(); i++) {
 		dfs(i);
 	}
+
+	cout << minDistance << endl;
 
 	return 0;
 }
