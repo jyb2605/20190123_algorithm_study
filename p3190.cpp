@@ -141,28 +141,43 @@ int main()
 	curDir = 'R';
 
 	while (true) {
-		
-		nextHead();
+		if (curSec != 0) {
+			// move head
+			nextHead();
 
-		// find Apple
-		if (map[headX][headY] == 'A') {
+			// find Apple
+			if (map[headX][headY] == 'A') {
+				map[headX][headY] = curDir;
+				// print();
+
+				// check changing direction
+				if (!sec.empty() && curSec == sec.front()) {
+					curDir = changeDir(dir.front());
+					sec.pop();
+					dir.pop();
+					map[headX][headY] = curDir;
+				}
+
+				curSec++;
+				continue;
+			}
+
+			// crush Wall or Body
+			if (map[headX][headY] != 'E') {
+				break;
+			}
+
+			// set head value
 			map[headX][headY] = curDir;
-			print();
-			curSec++;
-			continue;
+
+			// move and set tail
+			nextTail();
+
+			// print();
+
 		}
 
-		// crush Wall or Body
-		if (map[headX][headY] != 'E') {
-			break;
-		}
-
-		map[headX][headY] = curDir;
-
-		nextTail();
-
-		print();
-
+		// check changing direction
 		if (!sec.empty() && curSec == sec.front()) {
 			curDir = changeDir(dir.front());
 			sec.pop();
@@ -174,8 +189,6 @@ int main()
 	}
 
 	cout << curSec<< endl;
-
-
 
 	return 0;
 }
